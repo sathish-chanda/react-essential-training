@@ -1,0 +1,11 @@
+npm create vite@latest react-project -- --template react
+
+cd react-project
+npm install
+npm run dev
+
+Go to package.json and delete the dependencies block.
+
+npm install --save-exact react@rc react-dom@rc 
+
+npm install 
