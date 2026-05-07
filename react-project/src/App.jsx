@@ -1,4 +1,5 @@
 import './App.css'
+import chef from './images/chef.jpg'
 
 let language = 'JavaScript';
 let moon = '🌙';
@@ -23,12 +24,15 @@ function Main({dishes}) {
     //   <li>2</li>
     //   <li>3</li>
     // </ul>
-    <ul>
-      { 
-        // dishes.map((dish,i) => <li key={i} style = {{ listStyleType: 'none' }}>{dish}</li>) // This is not stable because the key index is computed at the rendering time.
-        dishes.map((dish) => <li key={dish.id} style = {{ listStyleType: 'none' }}>{dish.name}</li>)
-      }
-    </ul>
+    <main>
+      <img src={chef} alt="Chef" style={{ height: '200px' }}/>
+      <ul>
+        { 
+          // dishes.map((dish,i) => <li key={i} style = {{ listStyleType: 'none' }}>{dish}</li>) // This is not stable because the key index is computed at the rendering time.
+          dishes.map((dish) => <li key={dish.id} style = {{ listStyleType: 'none' }}>{dish.name}</li>)
+        }
+      </ul>
+    </main>
   )
 }
 
