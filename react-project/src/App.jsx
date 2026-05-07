@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css'
 import chef from './images/chef.jpg'
 
@@ -25,7 +24,7 @@ function Main({dishes}) {
     //   <li>2</li>
     //   <li>3</li>
     // </ul>
-     <React.Fragment> {/* Grouping the elements using the React Fragment */}
+      <>
         <div>
           <h2>Welcome to beautiful restaurant</h2>
         </div>
@@ -38,7 +37,7 @@ function Main({dishes}) {
             }
           </ul>
         </main>
-      </React.Fragment>
+      </>
   )
 }
 
