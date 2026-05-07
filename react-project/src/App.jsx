@@ -25,7 +25,7 @@ function Main({dishes}) {
     // </ul>
     <ul>
       { 
-        // dishes.map((dish,i) => <li key={i} style = {{ listStyleType: 'none' }}>{dish}</li>)
+        // dishes.map((dish,i) => <li key={i} style = {{ listStyleType: 'none' }}>{dish}</li>) // This is not stable because the key index is computed at the rendering time.
         dishes.map((dish) => <li key={dish.id} style = {{ listStyleType: 'none' }}>{dish.name}</li>)
       }
     </ul>
@@ -37,7 +37,7 @@ function App() {
     <div>
       <Header name="Sathish" year={new Date().getFullYear()}/>
       {/* <Main dishes={items}/> */}
-      <Main dishes={dishObjects}/>
+      <Main dishes={dishObjects}/> {/* This is more stable then the above because the data is stable before rendering. */}
     </div>
   )
 }
