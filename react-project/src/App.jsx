@@ -25,7 +25,7 @@ function Main({dishes}) {
     //   <li>3</li>
     // </ul>
     <main>
-      <img src={chef} alt="Chef" style={{ height: '200px' }}/>
+      <img src={chef} alt="A photo of a smiling chef owner " style={{ height: '200px' }}/> {/* alt text is useful when someone uses screen reading technology */}
       <ul>
         { 
           // dishes.map((dish,i) => <li key={i} style = {{ listStyleType: 'none' }}>{dish}</li>) // This is not stable because the key index is computed at the rendering time.
