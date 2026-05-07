@@ -11,13 +11,27 @@ function Header({name,year}) {
     </header>
   )
 }
+
+const dishes = ['Pizza', 'Pasta', 'Risotto'];
+
+function Main() {
+  return (
+    // <ul>
+    //   <li>1</li>
+    //   <li>2</li>
+    //   <li>3</li>
+    // </ul>
+    <ul>
+      { dishes.map((dish) => <li style = {{ listStyleType: 'none' }}>{dish}</li>)}
+    </ul>
+  )
+}
+
 function App() {
   return (
     <div>
       <Header name="Sathish" year={new Date().getFullYear()}/>
-      <main>
-      <h2>We serve very delicious food {moon}</h2>
-      </main>
+      <Main dishes={dishes}/>
     </div>
   )
 }
