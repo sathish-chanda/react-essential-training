@@ -24,15 +24,20 @@ function Main({dishes}) {
     //   <li>2</li>
     //   <li>3</li>
     // </ul>
-    <main>
-      <img src={chef} alt="A photo of a smiling chef owner " style={{ height: '200px' }}/> {/* alt text is useful when someone uses screen reading technology */}
-      <ul>
-        { 
-          // dishes.map((dish,i) => <li key={i} style = {{ listStyleType: 'none' }}>{dish}</li>) // This is not stable because the key index is computed at the rendering time.
-          dishes.map((dish) => <li key={dish.id} style = {{ listStyleType: 'none' }}>{dish.name}</li>)
-        }
-      </ul>
-    </main>
+     <div> {/*Adding more div clutter the DOM and make it more difficult to style the application. So we can use React Fragment instead of div. */}
+        <div>
+          <h2>Welcome to beautiful restaurant</h2>
+        </div>
+        <main>
+          <img src={chef} alt="A photo of a smiling chef owner " style={{ height: '200px' }}/> {/* alt text is useful when someone uses screen reading technology */}
+          <ul>
+            { 
+              // dishes.map((dish,i) => <li key={i} style = {{ listStyleType: 'none' }}>{dish}</li>) // This is not stable because the key index is computed at the rendering time.
+              dishes.map((dish) => <li key={dish.id} style = {{ listStyleType: 'none' }}>{dish.name}</li>)
+            }
+          </ul>
+        </main>
+      </div>
   )
 }
 
