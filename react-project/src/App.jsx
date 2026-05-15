@@ -1,6 +1,6 @@
 import './App.css'
 import chef from './images/chef.jpg'
-
+import { useState } from 'react';
 let language = 'JavaScript';
 let moon = '🌙';
 
@@ -18,6 +18,7 @@ const items = ['Pizza', 'Pasta', 'Risotto', 'Tiramisu', 'Gelato', 'Coffee'];
 const dishObjects = items.map((dish,i) => ({id: i, name: dish}));
 
 function Main({dishes}) {
+  const [status, setStatus] = useState('open');
   return (
     // <ul>
     //   <li>1</li>
@@ -26,7 +27,9 @@ function Main({dishes}) {
     // </ul>
       <>
         <div>
-          <h2>Welcome to beautiful restaurant</h2>
+          <h2>Welcome to beautiful restaurant! Restaurent is {status}</h2>
+          <button onClick={() => setStatus('open')}>Open</button>
+          <button onClick={() => setStatus('closed')}>Close</button>
         </div>
         <main>
           <img src={chef} alt="A photo of a smiling chef owner " style={{ height: '200px' }}/> {/* alt text is useful when someone uses screen reading technology */}
