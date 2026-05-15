@@ -17,8 +17,7 @@ const items = ['Pizza', 'Pasta', 'Risotto', 'Tiramisu', 'Gelato', 'Coffee'];
 
 const dishObjects = items.map((dish,i) => ({id: i, name: dish}));
 
-function Main({dishes}) {
-  const [status, setStatus] = useState('open');
+function Main({dishes, status, updateStatus}) {
   return (
     // <ul>
     //   <li>1</li>
@@ -28,8 +27,8 @@ function Main({dishes}) {
       <>
         <div>
           <h2>Welcome to beautiful restaurant! Restaurent is {status}</h2>
-          <button onClick={() => setStatus('open')}>Open</button>
-          <button onClick={() => setStatus('closed')}>Close</button>
+          <button onClick={() => updateStatus('open')}>Open</button>
+          <button onClick={() => updateStatus('closed')}>Close</button>
         </div>
         <main>
           <img src={chef} alt="A photo of a smiling chef owner " style={{ height: '200px' }}/> {/* alt text is useful when someone uses screen reading technology */}
@@ -45,11 +44,15 @@ function Main({dishes}) {
 }
 
 function App() {
+  const [status, setStatus] = useState('open');
   return (
     <div>
       <Header name="Sathish" year={new Date().getFullYear()}/>
       {/* <Main dishes={items}/> */}
-      <Main dishes={dishObjects}/> {/* This is more stable then the above because the data is stable before rendering. */}
+      <h3>Restaurant is {status}</h3>
+      <Main dishes={dishObjects} status={status} updateStatus={setStatus}/> {/* This is more stable then the above because the data is stable before rendering. */}
+      <button onClick={() => setStatus('open')}>Open From App Component</button>
+      <button onClick={() => setStatus('closed')}>Close From App Component</button>
     </div>
   )
 }
