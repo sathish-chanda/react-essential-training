@@ -1,6 +1,6 @@
 import './App.css'
 import chef from './images/chef.jpg'
-import { useState } from 'react';
+import { useState , useReducer} from 'react';
 let language = 'JavaScript';
 let moon = '🌙';
 
@@ -42,9 +42,45 @@ function Main({dishes, status, updateStatus}) {
       </>
   )
 }
+function SubSubMain({status, dispatchStatus}) {
+  return (
+    <>
+        <div>
+          <h2>SubSubMain! Welcome to beautiful restaurant! Restaurent is {status ? 'Open' : 'Closed'}</h2>
+          <button onClick={dispatchStatus}>{status ? 'Close' : 'Open'} Restaurant from SubSubMain Component</button>
+        </div>
+      </>
+  )
+}
+function SubMain({dishes, status, dispatchStatus}) {
+  return (
+    // <ul>
+    //   <li>1</li>
+    //   <li>2</li>
+    //   <li>3</li>
+    // </ul>
+      <>
+        <div>
+          <h2>SubMain! Welcome to beautiful restaurant! Restaurent is {status ? 'Open' : 'Closed'}</h2>
+          <button onClick={dispatchStatus}>{status ? 'Close' : 'Open'} Restaurant from SubMain Component</button>
+        </div>
+        <main>
+          <img src={chef} alt="A photo of a smiling chef owner " style={{ height: '200px' }}/> {/* alt text is useful when someone uses screen reading technology */}
+          <ul>
+            { 
+              // dishes.map((dish,i) => <li key={i} style = {{ listStyleType: 'none' }}>{dish}</li>) // This is not stable because the key index is computed at the rendering time.
+              dishes.map((dish) => <li key={dish.id} style = {{ listStyleType: 'none' }}>{dish.name}</li>)
+            }
+          </ul>
+        </main>
+        <SubSubMain status={status} dispatchStatus={dispatchStatus}/>
+      </>
+  )
+}
 
 function App() {
   const [status, setStatus] = useState('open');
+  const [reducerStatus, toggle] = useReducer( (reducerStatus) => !reducerStatus, true);
   return (
     <div>
       <Header name="Sathish" year={new Date().getFullYear()}/>
@@ -53,6 +89,11 @@ function App() {
       <Main dishes={dishObjects} status={status} updateStatus={setStatus}/> {/* This is more stable then the above because the data is stable before rendering. */}
       <button onClick={() => setStatus('open')}>Open From App Component</button>
       <button onClick={() => setStatus('closed')}>Close From App Component</button>
+      <br />
+      <h3>Restaurant Status From reducer is {reducerStatus ? 'Open' : 'Closed'}</h3>
+      <SubMain dishes={dishObjects} status={reducerStatus} dispatchStatus={toggle}/> {/* This is more stable then the above because the data is stable before rendering. */}
+      <button onClick={toggle}>{reducerStatus ? 'Close' : 'Open'} Restaurant From App Component</button>
+
     </div>
   )
 }
