@@ -1,6 +1,6 @@
 import './App.css'
 import chef from './images/chef.jpg'
-import { useState , useReducer} from 'react';
+import { useState , useReducer, useEffect, use } from 'react';
 let language = 'JavaScript';
 let moon = '🌙';
 
@@ -81,6 +81,11 @@ function SubMain({dishes, status, dispatchStatus}) {
 function App() {
   const [status, setStatus] = useState('open');
   const [reducerStatus, toggle] = useReducer( (reducerStatus) => !reducerStatus, true);
+
+  // loading data and using animation can be benefitted from useEffect hook. We can also use it to log the status change in the console.
+  useEffect(() => {
+    console.log(`Status changed to ${reducerStatus ? 'Open' : 'Closed'}`);
+  }, [reducerStatus]) // [] means the effect will run only once when the component first renders. [reducerStatus] means the effect will run every time the reducerStatus changes.
   return (
     <div>
       <Header name="Sathish" year={new Date().getFullYear()}/>
