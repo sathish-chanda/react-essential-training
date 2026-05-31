@@ -6,4 +6,8 @@ RUN:
   cd react_project
   npm install
   npm run dev
-  
+
+Update versions:
+  // npm install vite@5.4.11 - Do not as already default latest version is greater than this.
+  // npm install react@19.0.0 react-dom@19.0.0 - Do not as already default latest version is greater than this.
+  npm install vite-plugin-eslint --save-dev
