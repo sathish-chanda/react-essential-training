@@ -1,0 +1,9 @@
+npm create vite@latest react_project
+Select a framework: React 
+Select a variant: JavaScript
+
+RUN:
+  cd react_project
+  npm install
+  npm run dev
+  
