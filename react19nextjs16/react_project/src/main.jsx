@@ -1,4 +1,4 @@
-// import React from 'react' --- IGNORE --- Not required in React 17 and above
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 
 // Define an App component
@@ -11,4 +11,9 @@ export const App = () => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // Render the App component into root element
-root.render(<App />)
+root.render(
+  // Detecting potential problems in an application, and providing additional warnings and checks in development mode.
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
