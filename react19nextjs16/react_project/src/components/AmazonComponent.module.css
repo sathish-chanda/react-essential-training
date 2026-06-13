@@ -1,0 +1,16 @@
+.container {
+  color: #FF9900;
+  font-family: 'Verdana','Amazon Ember', 'Arial', 'sans-serif';
+  text-align: center;
+  margin:20px;
+}
+
+.header {
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.paragraph {
+  color: #146EB4;
+  font-size: 1.2rem;
+}
