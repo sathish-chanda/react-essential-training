@@ -41,9 +41,75 @@
 //   );
 
 // }
+import PropTypes from 'prop-types';
+
 import AppleComponent from "./components/AppleComponent";
 import GoogleComponent from "./components/GoogleComponent";
 import AmazonComponent from "./components/AmazonComponent";
+
+
+// Demonstration of props in React.
+const BlueComponent = () => {
+  return (
+    <div style={{ color : "blue" }}>
+      <p>This is a blue component</p>
+    </div>
+  )
+}
+
+const RedComponent = () => {
+  return (
+    <div style={{ color : "red" }}>
+      <p>This is a red component</p>
+    </div>
+  )
+}
+
+const GreenComponent = () => {
+  return (
+    <div style={{ color : "green" }}>
+      <p>This is a green component</p>
+    </div>
+  )
+}
+// Using Props to create a reusable ColorComponent that can display text in different colors based on the passed prop value.
+// const ColorComponent = (props) => {
+//   return (
+//     <div style={{ color : props.color }}>
+//       <p>This is a {props.color} component</p>
+//     </div>
+//   )
+// }
+
+const ColorComponent = ({color}) => {
+  return (
+    <div style={{ color : color }}>
+      <p>This is a {color} component</p>
+    </div>
+  )
+}
+
+// PropType validation for ColorComponent
+ColorComponent.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
+// Reusable UserProfile component
+const UserProfile = (props) => {
+  return (
+    <div>
+      <h2>{props.name}</h2>
+      <p>Age: {props.age}</p>
+      <p>Location: {props.location}</p>
+    </div>
+  )
+}
+
+const userDetails = {
+  name: "Alice",
+  age: 30,
+  location: "New York"
+};
 
 const App = () => {
   return (
@@ -51,6 +117,15 @@ const App = () => {
       <AmazonComponent />
       <AppleComponent />
       <GoogleComponent />
+      <GreenComponent />
+      <RedComponent />
+      <BlueComponent />
+      <ColorComponent color="purple" />
+      <ColorComponent color="orange" />
+      <ColorComponent color="yellow" />
+      <ColorComponent color="black" />
+      <ColorComponent color="pink" />
+      <UserProfile {...userDetails} />
     </div>
   )
 }
