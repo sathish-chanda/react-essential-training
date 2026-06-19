@@ -46,6 +46,7 @@ import PropTypes from 'prop-types';
 import AppleComponent from "./components/AppleComponent";
 import GoogleComponent from "./components/GoogleComponent";
 import AmazonComponent from "./components/AmazonComponent";
+import SpeedMessage from "./components/SpeedMessage";
 
 
 // Demonstration of props in React.
@@ -126,6 +127,10 @@ const App = () => {
       <ColorComponent color="black" />
       <ColorComponent color="pink" />
       <UserProfile {...userDetails} />
+
+      <SpeedMessage speed={45} />
+      <SpeedMessage speed={60} />
+      <SpeedMessage speed={50} />
     </div>
   )
 }
