@@ -48,6 +48,8 @@ import GoogleComponent from "./components/GoogleComponent";
 import AmazonComponent from "./components/AmazonComponent";
 import SpeedMessage from "./components/SpeedMessage";
 
+import TodoList from "./components/TodoList";
+
 
 // Demonstration of props in React.
 const BlueComponent = () => {
@@ -131,6 +133,8 @@ const App = () => {
       <SpeedMessage speed={45} />
       <SpeedMessage speed={60} />
       <SpeedMessage speed={50} />
+      
+      <TodoList />
     </div>
   )
 }
