@@ -115,7 +115,59 @@ const userDetails = {
   location: "New York"
 };
 
+// Pure function : 1. Always returns the same output for the same input. 
+//                 2. Does not cause any side effects (e.g., modifying variables outside its score, altering the DOM, etc).
+// Pure Component
+function Greeting({ name }) {
+  return <h1>Hello, {name}!</h1>;
+}
+
+let counter = 0;
+// Impure Component
+function ImpureGreeting({ name }) {
+  counter++; // Modifies a variable outside its scope.
+  return <h1>Hello, {name}! Count: {counter}.</h1>;
+}
+
+const ShoppingList = ( { items }) => {
+  const listStyle = {
+    listStyleType: "none",
+    padding: 0,
+  };
+  
+  const itemStyle = {
+    padding: "10px",
+    margin: '5px 0',
+    border: "1px solid #ccc",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
+    fontFamily: "Arial, sans-serif",
+    fontSize: "16px",
+  };
+
+  // Directly modifying the items array to demonstrate impure behavior. This is not recommended in real applications.
+  //items.push({ id: 6, label: "Butter" }); // Adding an item to the list
+  const extendedItems = [...items, { id: 7, label: "Add item" }]; // Creating a new array with an additional item
+
+  return (
+    <>
+      <ul style={listStyle}>
+        {extendedItems.map((item) => (
+          <li key={item.id} style={itemStyle}>{item.label}</li>
+        ))}
+      </ul>
+    </>
+  )
+}
 const App = () => {
+  const items = [
+    { id: 1, label: "Milk" },
+    { id: 2, label: "Bread" },
+    { id: 3, label: "Eggs" },
+    { id: 4, label: "Cheese" },
+    { id: 5, label: "Fruits" }
+  ];
+
   return (
     <div>
       <AmazonComponent />
@@ -141,6 +193,15 @@ const App = () => {
         <CarList />
         <CarList make="Tesla" />
       </div>
+
+      <Greeting name="Alice" />
+      <Greeting name="Alice" />
+      <Greeting name="Alice" />
+      <ImpureGreeting name="Bob" />
+      <ImpureGreeting name="Bob" />
+      <ImpureGreeting name="Bob" />
+      
+      <ShoppingList items={items} />
     </div>
   )
 }
