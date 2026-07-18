@@ -49,6 +49,7 @@ import AmazonComponent from "./components/AmazonComponent";
 import SpeedMessage from "./components/SpeedMessage";
 
 import TodoList from "./components/TodoList";
+import CarList from './components/CarList';
 
 
 // Demonstration of props in React.
@@ -135,6 +136,11 @@ const App = () => {
       <SpeedMessage speed={50} />
       
       <TodoList />
+      <div>
+        <h1>Welcome to the Car Showroom!</h1>
+        <CarList />
+        <CarList make="Tesla" />
+      </div>
     </div>
   )
 }
