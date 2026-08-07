@@ -6,7 +6,6 @@ import PropertyList from "./components/PropertyList/PropertyList"
 const App = () => {
   return (
     <div>
-      <h1>Cambridge Rentals</h1>
       <Header />
       <main>
         <Title />
