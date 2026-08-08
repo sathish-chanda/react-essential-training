@@ -32,7 +32,7 @@ const Footer = () => {
       </div>
       {/* Display the contact information */}
       <div style={{ marginTop: "0.5rem" }}>
-        Opening hours Monday to Friday, {openingHour}am to {closingHour - 12}pm.
+        Opening hours: Monday to Friday, {openingHour}am to {closingHour}pm.
       </div>
     </>
   )

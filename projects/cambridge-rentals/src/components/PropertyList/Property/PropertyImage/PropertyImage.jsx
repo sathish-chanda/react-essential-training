@@ -1,8 +1,11 @@
 import "./PropertyImage.css"  
 
-const PropertyImage = () => {
+const PropertyImage = ({image, children}) => {
   return (
-    <div>
+    <div 
+      className="property-image"
+      style= {{ backgroundImage: `url(${image})`}}>
+      {children}
     </div>
   )
 }
