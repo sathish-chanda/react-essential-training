@@ -1,6 +1,6 @@
 import "./IconWithText.css"
 
-const IconWithText = () => {
+const IconWithText = ({ Icon, text }) => {
   return (
     <span>
     </span>

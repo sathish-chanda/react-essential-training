@@ -1,6 +1,7 @@
 import PropertyImage from "./PropertyImage/PropertyImage"
 import "./Property.css"
-
+import PropertyTypeLabel from "./PropertyImage/PropertyTypeLabel/PropertyTypeLabel"
+import PropertyBanner from "./PropertyImage/PropertyBanner/PropertyBanner"
 const Property = ( {
   image,
   bedrooms,
@@ -16,7 +17,8 @@ const Property = ( {
     <div className="property-card"
          style = {{ opacity: available ? 1 : 0.5 }}>   
       <PropertyImage image={image}>
-        Property details
+        <PropertyTypeLabel type={type} />
+        {!available && <PropertyBanner />}
       </PropertyImage>
       <div>
         Property Attributes.
