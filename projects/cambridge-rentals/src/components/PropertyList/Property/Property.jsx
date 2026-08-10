@@ -4,6 +4,7 @@ import PropertyTypeLabel from "./PropertyImage/PropertyTypeLabel/PropertyTypeLab
 import PropertyBanner from "./PropertyImage/PropertyBanner/PropertyBanner"
 import IconWithText from "./PropertyImage/IconWithText/IconWithText"
 import {Bed,Maximize,Bath} from "lucide-react"
+import PropertyAttribute from "./PropertyAttribute/PropertyAttribute"
 const Property = ( {
   image,
   bedrooms,
@@ -29,9 +30,13 @@ const Property = ( {
           <IconWithText Icon={Maximize} text={`${surface} m²`} />
         </div>
       </PropertyImage>
-      <div>
-        Property Attributes.
-      </div>
+      <PropertyAttribute text={address} />
+      <PropertyAttribute 
+        text={`$${rent} / month`}
+        color="#2CDEB6" 
+        bold={true}
+        />
+      <PropertyAttribute text={`Available from ${date}`} />
     </div>
   )
 }

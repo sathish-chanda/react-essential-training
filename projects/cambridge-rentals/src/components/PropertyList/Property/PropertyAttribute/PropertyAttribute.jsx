@@ -1,8 +1,12 @@
 import "./PropertyAttribute.css"
 
-const PropertyAttribute = () => {
+const PropertyAttribute = ( { text , color = "#444", bold = false }) => {
+  const style = { color, fontWeight: bold ? "bold" : "normal" }
   return (
-    <p>
+    <p 
+      className="property-attribute"
+      style={style}>
+      {text}
     </p>
   )
 }
