@@ -2,7 +2,8 @@ import "./IconWithText.css"
 
 const IconWithText = ({ Icon, text }) => {
   return (
-    <span>
+    <span className="icon-with-text">
+      <Icon size={14} />{" "}{text}
     </span>
   )
 }
