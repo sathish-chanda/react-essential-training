@@ -50,6 +50,8 @@ import SpeedMessage from "./components/SpeedMessage";
 
 import TodoList from "./components/TodoList";
 import CarList from './components/CarList';
+import Button from './components/Button';
+import {useState} from "react";
 
 
 // Demonstration of props in React.
@@ -160,6 +162,22 @@ const ShoppingList = ( { items }) => {
   )
 }
 const App = () => {
+  const [count, setCount] = useState(0);
+  const handleLog = () => {
+    console.log("Clicked on the log message");
+  }
+  const changeToGreen = () => {
+    document.body.style.backgroundColor = "lightgreen";
+  }
+  const changeToBlue = () => {
+    document.body.style.backgroundColor = "lightblue";
+  }
+  const increment = () => {
+    setCount(count + 1);
+  }
+  const decrement = () => {
+    setCount(count - 1);
+  }
   const items = [
     { id: 1, label: "Milk" },
     { id: 2, label: "Bread" },
@@ -202,6 +220,21 @@ const App = () => {
       <ImpureGreeting name="Bob" />
       
       <ShoppingList items={items} />
+      <div>
+        <h1>Adding interactive functionality</h1>
+        <button onClick={() => alert("Button clicked!")}>Alert Me</button>
+        <button onClick={() => console.log("Button clicked!")}>Log Click</button>
+        <button onClick={() => window.location.reload()}>Reload Page</button>
+        <Button onClick={handleLog}>Log Me</Button>
+        <Button onClick={changeToBlue}>Change To Blue</Button>
+        <Button onClick={changeToGreen}>Change To Green</Button>
+        <br />
+        {/* <span> */}
+        <Button onClick={increment}>+</Button>
+        {count}
+        <Button onClick={decrement}>-</Button>
+        {/* </span> */}
+      </div>
     </div>
   )
 }
