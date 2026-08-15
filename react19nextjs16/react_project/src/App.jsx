@@ -186,6 +186,30 @@ const App = () => {
     { id: 5, label: "Fruits" }
   ];
 
+  const handleParentClick = () => {
+    alert("Clicked on the parent!");
+    console.log("Clicked on the parent!");
+  }
+
+  const handleChildClick = (event) => {
+    event.stopPropagation();
+    alert("Clicked on the Child!");
+    console.log("Clicked on the child!");
+  }
+
+  const handleLinkClick = (event) => {
+    event.preventDefault();
+    console.log("Link Click Prevented!");
+  }
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log("Prevented default form submition");
+    const formData = new FormData(event.target);
+    const name = formData.get("message");
+    console.log("Submitted Data: ", {name});
+  }
+
   return (
     <div>
       <AmazonComponent />
@@ -234,6 +258,45 @@ const App = () => {
         {count}
         <Button onClick={decrement}>-</Button>
         {/* </span> */}
+      </div>
+      {/* Event Propagation Example  */}
+      <div 
+          style={{ padding : "30px", 
+                   background: "lightgreen", 
+                   textAlign: "center", }}
+          onClick = {handleParentClick}>
+        Parent
+        <div 
+          style={{ padding : "20px", 
+                   background: "lightblue", 
+                   textAlign: "center", 
+                   marginTop: "20px",}}
+              onClick={handleChildClick}>
+          Child
+        </div>
+      </div>
+
+      {/* Preventing default behavior */}
+      <div>
+        {/* Link Example */}
+        <a href="https://example.com" 
+           onClick={handleLinkClick}>Link</a>
+        {/* Form submission example */}
+        <form 
+          style={{ display: "flex", gap: "10px", marginTop: "20px" }}
+          onSubmit={handleFormSubmit}>
+          
+          <input
+            type="text"
+            name="message"
+            placeholder="Enter your message"
+            style={{ padding: "5px" }} 
+          />
+          <button type="submit">Submit</button>
+        </form>
+        <div>
+
+        </div>
       </div>
     </div>
   )
