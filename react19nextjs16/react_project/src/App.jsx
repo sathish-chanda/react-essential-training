@@ -53,6 +53,7 @@ import CarList from './components/CarList';
 import Button from './components/Button';
 import {useState} from "react";
 
+import Counter from './components/Counter';
 
 // Demonstration of props in React.
 const BlueComponent = () => {
@@ -210,6 +211,22 @@ const App = () => {
     console.log("Submitted Data: ", {name});
   }
 
+  let [x, setX] = useState(0)
+
+  // updating the state by passing value (may cause a stale state issue)
+  const incrementWithValue = () => {
+    setX(x + 1);
+    setX(x + 1); // Might not work as expected due to stale state.
+  }
+
+  // Update the state by passing a function (always gets the latest state)
+  const incrementWithFunction = () => {
+    setX(prev => prev + 1);
+    console.log("x: ", {x})
+    setX(prev => prev + 1); // Correctly updates twice
+    console.log("x: ", {x})
+  }
+
   return (
     <div>
       <AmazonComponent />
@@ -295,7 +312,17 @@ const App = () => {
           <button type="submit">Submit</button>
         </form>
         <div>
+          <Counter />
+          <Counter />
+          <Counter />
+          <Counter />
+          <Counter />
+        </div>
 
+        <div style={{ textAlign: "center", marginTop: "20px"}}>
+            <h1>X: {x}</h1>
+            <button style={{ margin: "20px", padding: "10px" }} onClick={incrementWithValue}>Increment (using value)</button>
+            <button style={{ margin: "20px", padding: "10px" }} onClick={incrementWithFunction}>Increment (using function)</button>
         </div>
       </div>
     </div>
