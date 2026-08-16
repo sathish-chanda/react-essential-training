@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "immer": "^11.1.17",
+    "lucide-react": "^1.31.0"
+  }
+}

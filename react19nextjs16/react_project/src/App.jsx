@@ -55,6 +55,12 @@ import {useState} from "react";
 
 import Counter from './components/Counter';
 
+// npm install immer 
+import { produce } from "immer";
+
+// npm install lucide-react
+import { RefreshCcw, Trash, ArrowDownWideNarrow} from "lucide-react"
+
 // Demonstration of props in React.
 const BlueComponent = () => {
   return (
@@ -194,6 +200,16 @@ const App = () => {
     }}); // Creating a new object
   }
 
+  // User Immer to simply updates
+  const changeAgeWithImmer = () => {
+    setUser(
+      // Immer allows direct updates without breaking immutability
+      produce(user, (draft) => {
+        draft.details.age = 40;
+      })
+    )
+  }
+ 
   const handleLog = () => {
     console.log("Clicked on the log message");
   }
@@ -255,6 +271,98 @@ const App = () => {
     console.log("x: ", {x})
     setX(prev => prev + 1); // Correctly updates twice
     console.log("x: ", {x})
+  }
+
+  const [animals, setAnimals] = useState([
+    {id: 1, name: "Cheetah", speed: 130 },
+    {id: 2, name: "African Elephant", speed: 48 },
+    {id: 3, name: "Rabbit", speed: 40 },
+    {id: 4, name: "Horse", speed: 70 },
+    {id: 5, name: "Donkey", speed: 20 },
+    {id: 6, name: "Buffallo", speed: 10 },
+  ]);
+
+  const animalOptions = [
+    {name: "Cheetah", speed: 130},
+    {name: "African Elephant", speed: 48},
+    {name: "Rabbit", speed: 40},
+    {name: "Horse", speed: 70},
+    {name: "Great Shark", speed: 50},
+    {name: "Kangaroo", speed: 71},
+    {name: "Lion", speed: 80},
+    {name: "Golden Eagle", speed: 320},
+    {name: "Penguin", speed: 9}
+  ]
+
+  //❌ Incorrect wat adding an animal
+  const addAnimalIncorrect = () => {
+    //❌ newAnimals points to the same array in memory
+    const newAnimals = animals;
+    //❌ push mutates animals since newAnimals points to animals
+    newAnimals.push({id: Date.now(), name: "Lion", speed: 80});
+    setAnimals(newAnimals);
+  }
+
+  const addAnimal = () => {
+    setAnimals([
+      ...animals,
+      {id: Date.now(), name: "Lion", speed: 80}
+    ])
+  }
+
+  const addAnimalWithImmer = () => {
+    setAnimals(
+      produce(animals, (draft) => {
+        const newAnimal = {id: Date.now(), name: "Lion", speed: 80};
+        draft.push(newAnimal);
+      })
+    );
+  };
+
+  const addRandomAnimal = () => {
+    setAnimals(
+      produce(animals, (draft) => {
+        const newAnimal = animalOptions[Math.floor(Math.random() * animalOptions.length)]
+        draft.push({id: Date.now(), ...newAnimal});
+      })
+    )
+  }
+
+  const addAnimalMonkey = () => {
+    setAnimals([
+      ...animals,
+      {id: Date.now(), name: "Monkey", speed: 70}
+    ])
+  }
+
+  const removeAnimal = (id) => {
+    console.log("RemoveAnimal : ", {id});
+    setAnimals(animals.filter((a) => a.id !== id))
+  }
+
+  const replaceAnimal = (id) => {
+    setAnimals((currentAnimals) => {
+      const currentAnimal = currentAnimals.find((a) => a.id === id);
+
+      if (!currentAnimal) return currentAnimals;
+
+      const availableAnimals = animalOptions.filter(
+        (a) => a.name !== currentAnimal.name
+      );
+
+      if (availableAnimals.length === 0) return currentAnimals;
+
+      const randIdx = Math.floor(Math.random() * availableAnimals.length);
+      const newAnimal = availableAnimals[randIdx];
+
+      return currentAnimals.map((a) =>
+        a.id === id ? { ...a, ...newAnimal } : a
+      );
+    });
+  };
+
+  const sortBySpeed = () => {
+    setAnimals([...animals].sort((a,b) => b.speed - a.speed));
   }
 
   return (
@@ -341,7 +449,8 @@ const App = () => {
           />
           <button type="submit">Submit</button>
         </form>
-        <div>
+      </div>
+      <div>
           <Counter />
           <Counter />
           <Counter />
@@ -368,8 +477,105 @@ const App = () => {
           <button onClick={changeNameIncorrect}>Change Name (Incorrect)</button>
           <button onClick={changeName}>Change Name</button>
           <button onClick={changeLocation}>Change Location</button>
+          <button onClick={changeLocation}>Change Location</button>
+          <button onClick={changeAgeWithImmer}>Change Age (using Immer)</button>
         </div>
-      </div>
+        <div style={{ padding: "20px", fontFamily: "Arial" }}>
+          <h2>Animals & Their Speeds</h2>
+          <div style={{ marginTop: "20px", display: "flex", gap: "10px"}}>
+            <button 
+              style={{ 
+                padding: "10px 20px",
+                backgroundColor: "#4CAF50",
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontSize: "16px",
+              }}
+              onClick={addAnimal}>Add Lion</button>
+            <button 
+              style={{ 
+                padding: "10px 20px",
+                backgroundColor: "#4CAF50",
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontSize: "16px",
+              }}
+              onClick={addAnimalWithImmer}>Add Lion(using Immer)</button>
+            <button style={{ 
+                padding: "10px 20px",
+                backgroundColor: "#BCAAFF",
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontSize: "16px",
+              }}
+              onClick={addRandomAnimal}>Add Random Animal</button>
+            <button style={{ 
+                padding: "10px 20px",
+                backgroundColor: "#FDAF50",
+                color: "white",
+                border: "none",
+                borderRadius: "5px",
+                cursor: "pointer",
+                fontSize: "16px",
+              }}
+              onClick={addAnimalMonkey}>Add Monkey</button>
+              <button 
+                onClick={sortBySpeed}
+                style={{ 
+                  padding: "10px 20px",
+                  backgroundColor: "#1c15d8",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  fontSize: "16px",
+                }}>
+                <ArrowDownWideNarrow />
+              </button>
+          </div>
+          <ul style={{ padding: "0px", listStyle: "none" }}>
+            {animals.map((a) => (
+              <li key={a.id} 
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding: "10px 0",
+                    borderBottom: "1px solid #ddd",
+                    fontSize: "16px"
+                  }}>
+                <div>
+                  {a.name} - {a.speed} km/h
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <RefreshCcw 
+                    onClick={()=>replaceAnimal(a.id)}
+                    style={{
+                      cursor: "pointer",
+                      marginLeft: "10px",
+                      color: "blue",
+                      fontSize: "18px"
+                    }}
+                  />
+                  <Trash 
+                    onClick={() => removeAnimal(a.id)}
+                    style={{
+                        cursor: "pointer",
+                        marginLeft: "10px",
+                        color: "red",
+                        fontSize: "18px"
+                    }}/>
+                </div>
+              </li>
+            ))}
+          </ul> 
+        </div>
     </div>
   )
 }

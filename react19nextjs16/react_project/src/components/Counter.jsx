@@ -1,7 +1,7 @@
 import {useState} from "react"
 
 const Counter = () => {
-  console.log("Counter rendered");
+  // console.log("Counter rendered");
   // This will not work because re-rendering does not happen with the normal variables. we need special state variable which re-renders after updating it values.
   // let count = 0;
   let [count,setCount] = useState(0)
