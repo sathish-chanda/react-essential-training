@@ -162,8 +162,38 @@ const ShoppingList = ( { items }) => {
     </>
   )
 }
+
 const App = () => {
   const [count, setCount] = useState(0);
+  const [user,setUser] = useState({
+    name: "John",
+    details: {
+      age: 20,
+      location: "Toronto"
+    }
+  });
+
+  // Incorrect: Mutating the existing state directly.
+  const changeNameIncorrect = () => {
+    // Directly modifying state (WRONG)
+    // user.name = "Bob"; // This is giving an error
+    // setting the same object reference ( React won't detect change)
+    setUser(user);
+  }
+
+  // Correctly updating the object state (without mutation)
+  const changeName = () => {
+    setUser({...user, name: "Mark"}); // Creating a new object
+  }
+
+    // Correctly updating the object state (without mutation)
+  const changeLocation = () => {
+    setUser({...user, details: {
+      ...user.details,
+      location: "Montreal"
+    }}); // Creating a new object
+  }
+
   const handleLog = () => {
     console.log("Clicked on the log message");
   }
@@ -323,6 +353,21 @@ const App = () => {
             <h1>X: {x}</h1>
             <button style={{ margin: "20px", padding: "10px" }} onClick={incrementWithValue}>Increment (using value)</button>
             <button style={{ margin: "20px", padding: "10px" }} onClick={incrementWithFunction}>Increment (using function)</button>
+        </div>
+
+        <div style={{ padding: "20px", fontFamily: "Arial"}}>
+          <p>
+            <strong>Name:</strong> {user.name}
+          </p>
+          <p>
+            <strong>Age:</strong> {user.details.age}
+          </p>
+          <p>
+            <strong>Location:</strong> {user.details.location}
+          </p>
+          <button onClick={changeNameIncorrect}>Change Name (Incorrect)</button>
+          <button onClick={changeName}>Change Name</button>
+          <button onClick={changeLocation}>Change Location</button>
         </div>
       </div>
     </div>
