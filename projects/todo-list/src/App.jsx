@@ -23,7 +23,25 @@ function App() {
       priority: 3,
       done: false,
     },
+    {
+      id: 4,
+      text: "Read a Novel",
+      priority: 2,
+      done: false,
+    },
+    {
+      id: 5,
+      text: "Read a TextBook",
+      priority: 1,
+      done: false,
+    },
   ])
+  const [showOnlyIncomplete, setShowOnlyIncomplete] = useState(false)
+  const sortTasks = () => {
+    const sortedTasks = [...tasks]
+          .sort((a,b) => a.priority - b.priority)
+    setTasks(sortedTasks)
+  }
   return (
     <>
     <div style={{
@@ -34,8 +52,13 @@ function App() {
     }}> 
       <h2 style={{ textAlign: "center"}}>To-Do List</h2>
       <TaskForm />
-      <TaskControls />
-      <TaskList tasks={tasks}/>
+      <TaskControls 
+        showOnlyIncomplete={showOnlyIncomplete} 
+        setShowOnlyIncomplete={setShowOnlyIncomplete}
+        sortTasks={sortTasks} />
+      <TaskList 
+        tasks={tasks}
+        showOnlyIncomplete={showOnlyIncomplete} />
     </div>
     </>
   )
