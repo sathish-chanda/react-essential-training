@@ -42,6 +42,19 @@ function App() {
           .sort((a,b) => a.priority - b.priority)
     setTasks(sortedTasks)
   }
+
+  const toggleTaskDone = (id) => {
+    const updatedTasks = tasks.map((task) => 
+      task.id === id ? { ...task, done: !task.done} : {...task}
+    )
+    setTasks(updatedTasks)
+  }
+
+  const deleteTask = (id) => {
+    const updatedTasks = tasks.filter((task) => task.id !== id)
+    setTasks(updatedTasks)
+  }
+
   return (
     <>
     <div style={{
@@ -58,7 +71,9 @@ function App() {
         sortTasks={sortTasks} />
       <TaskList 
         tasks={tasks}
-        showOnlyIncomplete={showOnlyIncomplete} />
+        showOnlyIncomplete={showOnlyIncomplete}
+        toggleTaskDone={toggleTaskDone}
+        deleteTask={deleteTask} />
     </div>
     </>
   )

@@ -1,10 +1,11 @@
 import { Trash, Pencil } from "lucide-react"
-const TaskItem = ({ task }) => {
+const TaskItem = ({ task, toggleTaskDone, deleteTask }) => {
   return (
     <>
     <div style={{ display: "flex", alignItems: "center", flewGrow: 1}}>
       <input type="checkbox"
         checked={task.done}
+        onChange={() => toggleTaskDone(task.id)}
         style={{ marginRight: "10px" }} />
       <span style={{
         textDecoration: task.done ? "line-through" : "none",
@@ -48,6 +49,7 @@ const TaskItem = ({ task }) => {
         border: "none",
         cursor: "pointer",
       }}
+      onClick={() => deleteTask(task.id)}
       >
         <Trash size={16} />
       </button>

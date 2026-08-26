@@ -1,7 +1,7 @@
 import TaskItem from "./TaskItem"
 import EditTaskForm from "./EditTaskForm"
 
-const TaskList = ({ tasks , showOnlyIncomplete }) => {
+const TaskList = ({ tasks , showOnlyIncomplete, toggleTaskDone, deleteTask }) => {
   return (
     <ul>
       {tasks
@@ -17,7 +17,9 @@ const TaskList = ({ tasks , showOnlyIncomplete }) => {
             gap: "10px"
           }}
         >
-          <TaskItem task={task}/>
+          <TaskItem task={task}
+            toggleTaskDone={toggleTaskDone}
+            deleteTask={deleteTask} />
         </li>
       ))}
     </ul>
