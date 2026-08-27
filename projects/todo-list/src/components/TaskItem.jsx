@@ -1,5 +1,5 @@
 import { Trash, Pencil } from "lucide-react"
-const TaskItem = ({ task, toggleTaskDone, deleteTask }) => {
+const TaskItem = ({ task, toggleTaskDone, deleteTask, setEditingTaskId }) => {
   return (
     <>
     <div style={{ display: "flex", alignItems: "center", flewGrow: 1}}>
@@ -38,6 +38,7 @@ const TaskItem = ({ task, toggleTaskDone, deleteTask }) => {
         border: "none",
         cursor: "pointer",
       }}
+      onClick={() => {setEditingTaskId(task.id); console.log("clicked on id " + task.id)}}
       >
         <Pencil size={16} />
       </button>

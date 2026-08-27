@@ -1,7 +1,8 @@
 import TaskItem from "./TaskItem"
 import EditTaskForm from "./EditTaskForm"
-
-const TaskList = ({ tasks , showOnlyIncomplete, toggleTaskDone, deleteTask }) => {
+import { useState } from "react"
+const TaskList = ({ tasks , showOnlyIncomplete, toggleTaskDone, deleteTask, updateTask }) => {
+  const [editingTaskId, setEditingTaskId] = useState(3)
   return (
     <ul>
       {tasks
@@ -17,9 +18,15 @@ const TaskList = ({ tasks , showOnlyIncomplete, toggleTaskDone, deleteTask }) =>
             gap: "10px"
           }}
         >
-          <TaskItem task={task}
-            toggleTaskDone={toggleTaskDone}
-            deleteTask={deleteTask} />
+          {editingTaskId == task.id ?
+            (<EditTaskForm task={task} 
+                setEditingTaskId={setEditingTaskId}
+                updateTask={updateTask}
+                />) : (
+              <TaskItem task={task}
+                toggleTaskDone={toggleTaskDone}
+                deleteTask={deleteTask} 
+                setEditingTaskId={setEditingTaskId} /> )}
         </li>
       ))}
     </ul>

@@ -60,6 +60,14 @@ function App() {
     setTasks(allTasks)
   }
 
+  const updateTask = ( id, editText, editPriority) => {
+      const updatedTasks = tasks.map((task) => (
+        task.id == id ? 
+          {...task, text: editText, priority: editPriority } : task
+      ))
+      setTasks(updatedTasks)
+  }
+
   return (
     <>
     <div style={{
@@ -78,7 +86,8 @@ function App() {
         tasks={tasks}
         showOnlyIncomplete={showOnlyIncomplete}
         toggleTaskDone={toggleTaskDone}
-        deleteTask={deleteTask} />
+        deleteTask={deleteTask} 
+        updateTask={updateTask} />
     </div>
     </>
   )
