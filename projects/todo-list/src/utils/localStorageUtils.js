@@ -6,3 +6,7 @@ export const getStoredTasks = () => {
 export const updateLocalStorage = (tasks) => {
   localStorage.setItem("tasks",JSON.stringify(tasks))
 }
+
+export const clearLocalStorage = () => {
+  localStorage.clear()
+}
