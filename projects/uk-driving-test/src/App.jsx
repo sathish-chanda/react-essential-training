@@ -6,6 +6,7 @@ import "./App.css"
 import QuestionView from "./components/QuestionView"
 import ProgressBar from "./components/ProgressBar"
 import AppBanner from "./components/AppBanner"
+import ResultView from "./components/ResultView"
 
 const initialState = {
   currentQuestion: 0,
@@ -14,7 +15,6 @@ const initialState = {
   // Total time allowed for the quiz in seconds (57 minutes)
   timeLeft: 57*60
 }
-
 const App = () => {
   const [state,dispatch] = useReducer(
     (state,action) => quizReducer(state,action),
@@ -37,12 +37,21 @@ const App = () => {
         timeLeft={state.timeLeft}
         dispatch={dispatch} />
   )
+
+  const score = state.answers.reduce((acc,answer,idx) => {
+    return answer === questions[idx].correctAnswer ? acc + 1 : acc;
+  }, 0);
   
-  const resultView = (<></>)
+  const resultView = (
+  <ResultView score={score}
+    questions={questions}
+    answers={state.answers}
+    />
+  )
   
   return (
     <div className="app-container">
-      <TempComponent state={state} dispatch={dispatch} />
+      {/* <TempComponent state={state} dispatch={dispatch} /> */}
       <ProgressBar current={state.currentQuestion} 
         total={state.answers.length} />
       <AppBanner />

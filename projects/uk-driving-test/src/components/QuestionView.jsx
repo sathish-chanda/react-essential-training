@@ -13,14 +13,6 @@ const QuestionView = ( {
   timeLeft,
   dispatch,
 }) => {
-  const onClickNext = () => {
-    dispatch({type: "NEXT"})
-  }
-
-  const onClickPrevious = () => {
-    dispatch({type: "PREVIOUS"})
-  }
-
   return (
     <Card>
       <QuestionHeader currentQuestion={currentQuestion}
