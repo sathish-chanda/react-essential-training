@@ -2,6 +2,7 @@ import Card from "./ui/Card"
 import QuestionHeader from "./QuestionHeader";
 import QuestionText from "./QuestionText";
 import AnswerOptions from "./AnswerOptions";
+import MediaDisplay from "./MediaDisplay"
 const QuestionView = ( {
   q,
   currentQuestion,
@@ -19,12 +20,18 @@ const QuestionView = ( {
       <div style={{ display: "flex", gap: "1rem", flexDirection: "row"}}>
          <div style={{ flex: 1}}>
           <QuestionText text={q.question} />
+          <AnswerOptions options={q.options} 
+            selectedIndex={selectedAnswer}
+            onSelect={onAnswer} /> 
          </div>
+         {(q.type === "image" || q.type === "video") && (
+          <MediaDisplay 
+            type={q.type}
+            image={q.image}
+            video={q.video} 
+            />
+         )}
       </div>
-      <AnswerOptions options={q.options} 
-        selectedIndex={selectedAnswer}
-        onSelect={onAnswer}
-      />
     </Card>
   )
 }
