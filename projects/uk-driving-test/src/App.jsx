@@ -20,18 +20,24 @@ const App = () => {
   )
 
   const q = questions[state.currentQuestion]
+  
+  const handleAnswer = (index) => {
+    dispatch({ type: "ANSWER", payload: index})
+  }
+
   const questionView = (
     <QuestionView 
         q={q} 
         currentQuestion={state.currentQuestion} 
         totalQuestions={state.answers.length} 
         selectedAnswer={state.answers[state.currentQuestion]} 
-        onAnswer={()=> console.log("Answered")}
+        onAnswer={handleAnswer}
         timeLeft={state.timeLeft}
         dispatch={dispatch} />
   )
   
   const resultView = (<></>)
+  
   return (
     <div className="app-container">
       <TempComponent state={state} dispatch={dispatch} />
