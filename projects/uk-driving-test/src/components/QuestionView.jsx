@@ -3,6 +3,7 @@ import QuestionHeader from "./QuestionHeader";
 import QuestionText from "./QuestionText";
 import AnswerOptions from "./AnswerOptions";
 import MediaDisplay from "./MediaDisplay"
+import NavigationControls from "./NavigationControls";
 const QuestionView = ( {
   q,
   currentQuestion,
@@ -12,6 +13,14 @@ const QuestionView = ( {
   timeLeft,
   dispatch,
 }) => {
+  const onClickNext = () => {
+    dispatch({type: "NEXT"})
+  }
+
+  const onClickPrevious = () => {
+    dispatch({type: "PREVIOUS"})
+  }
+
   return (
     <Card>
       <QuestionHeader currentQuestion={currentQuestion}
@@ -26,12 +35,17 @@ const QuestionView = ( {
          </div>
          {(q.type === "image" || q.type === "video") && (
           <MediaDisplay 
+            key={q.id}
             type={q.type}
             image={q.image}
             video={q.video} 
             />
          )}
       </div>
+      <NavigationControls 
+        currentQuestion={currentQuestion}
+        totalQuestions={totalQuestions}
+        dispatch={dispatch} />
     </Card>
   )
 }
