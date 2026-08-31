@@ -25,6 +25,7 @@ const App = () => {
   
   const handleAnswer = (index) => {
     dispatch({ type: "ANSWER", payload: index})
+    dispatch({type: "NEXT"})
   }
 
   const questionView = (
