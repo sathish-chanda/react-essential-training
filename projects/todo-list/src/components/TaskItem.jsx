@@ -1,5 +1,7 @@
 import { Trash, Pencil } from "lucide-react"
-const TaskItem = ({ task, toggleTaskDone, deleteTask, setEditingTaskId }) => {
+import { useTaskActions } from "../context/TaskContext";
+const TaskItem = ({ task, setEditingTaskId }) => {
+  const {toggleTaskDone, deleteTask} = useTaskActions()
   return (
     <>
     <div style={{ display: "flex", alignItems: "center", flewGrow: 1}}>

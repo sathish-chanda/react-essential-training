@@ -1,8 +1,10 @@
 import { Check } from "lucide-react"
 import { useState } from "react"
-const EditTaskForm = ( {task, setEditingTaskId, updateTask} ) => {
+import { useTaskActions } from "../context/TaskContext"
+const EditTaskForm = ( {task, setEditingTaskId} ) => {
   const [editText,setEditText] = useState(task.text)
   const [editPriority, setEditPriority] = useState(task.priority)
+  const {updateTask} = useTaskActions()
   const saveEdit = () => {
     if(editText.trim()) {
       updateTask(task.id, editText, editPriority)
